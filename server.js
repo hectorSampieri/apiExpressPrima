@@ -54,6 +54,56 @@ app.delete('/explorers/:id', async (req, res) => {
 	return res.json({message: "Eliminado correctamente"});
 });
 
+// Tabla Adicional
+
+app.get('/users', async (req, res) => {
+  const allExplorers =  await prisma.user.findMany({});
+  res.json(allExplorers);
+});
+
+app.get('/users/:id', async (req, res) => {
+  const id = req.params.id;
+  const user = await prisma.user.findUnique({where: {id: parseInt(id)}});
+  res.json(user);
+});
+
+app.post('/user', async (req, res) => {
+  const user = {
+    name: req.body.name,
+    lang: req.body.lang,
+    missionCommander: req.body.missionCommander,
+    enrollments: req.body.enrollments,
+    hasCertification: req.body.hasCertification
+   };
+  const message = 'User creado.';
+  await prisma.user.create({data: user});
+  return res.json({message});
+});
+
+app.put('/user/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+
+await prisma.user.update({
+  where: {
+    id: id
+  },
+  data: {
+    lang: req.body.lang,
+    missionCommander: req.body.missionCommander,
+    enrollments: req.body.enrollments,
+    hasCertification: req.body.hasCertification
+  }
+})
+
+return res.json({message: "Actualizado correctamente"});
+});
+
+app.delete('/user/:id', async (req, res) => {
+const id = parseInt(req.params.id);
+await prisma.user.delete({where: {id: id}});
+return res.json({message: "Eliminado correctamente"});
+});
+
 
 
 app.listen(port, () => {
