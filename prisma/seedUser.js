@@ -3,47 +3,55 @@ const prisma = new PrismaClient();
 
 (async function main() {
   try {
-    const woopa = await prisma.explorer.upsert({
+    const woopa = await prisma.user.upsert({
       where: { name: 'Woopa' },
       update: {},
       create: {
         name: 'Woopa',
-				username: 'ajolonauta',
-				mission: 'Node'
+				lang: 'Español',
+				missionCommander: 'Carlo',
+        enrollments: 3,
+        hasCertification :true,
       },
     });
 
-    const woopa1 = await prisma.explorer.upsert({
+    const woopa1 = await prisma.user.upsert({
       where: { name: 'Woopa1' },
       update: {},
       create: {
-        name: 'Woopa1',
-				username: 'ajolonauta1',
-				mission: 'Node'
+        name: 'Woopa2',
+				lang: 'Ingles',
+				missionCommander: 'Carlo',
+        enrollments: 2,
+        hasCertification :false,
       },
     });
 
-    const woopa2 = await prisma.explorer.upsert({
+    const woopa2 = await prisma.user.upsert({
       where: { name: 'Woopa 2' },
       update: {},
       create: {
-        name: 'Woopa 2',
-				username: 'ajolonauta2',
-				mission: 'Java'
+        name: 'Woopa3',
+				lang: 'Español',
+				missionCommander: 'Carlo',
+        enrollments: 0,
+        hasCertification :false,
       },
     });
 
-    const woopa3 = await prisma.explorer.upsert({
+    const woopa3 = await prisma.user.upsert({
       where: { name: 'Woopa 3' },
       update: {},
       create: {
-        name: 'Woopa 3',
-				username: 'ajolonauta3',
-				mission: 'Node'
+        name: 'Woopa4',
+				lang: 'Español',
+				missionCommander: 'Carlo',
+        enrollments: 2,
+        hasCertification :true,
       },
     });
 
-    console.log('Create 3 explorers');
+    console.log('Create 5 userts');
   } catch(e) {
     console.error(e);
     process.exit(1);
